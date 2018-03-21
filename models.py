@@ -31,8 +31,8 @@ def complex_pokemon_model2(X,train=True):
   Y = tf.reshape(Y,[-1,3])
 
   inputt = tf.matmul(Y,conv_mat)
-  inputt = tf.reshape(inputt,[-1,32,32,3])
-  Y = tf.reshape(Y,[-1,32,32,3])
+  inputt = tf.reshape(inputt,[-1,256,256,3])
+  Y = tf.reshape(Y,[-1,256,256,3])
   inpp = inputt[:,:,:,1:3]
   inp = inputt[:,:,:,0:1]
 
@@ -60,7 +60,7 @@ def complex_pokemon_model2(X,train=True):
   a3 = tf.concat((inp,conv18),axis = 3)
   a3 = tf.reshape(a3,[-1,3])
   a2 = tf.matmul(a3,inv_conv_mat)
-  a2 = tf.reshape(a2,[-1,32,32,3])
+  a2 = tf.reshape(a2,[-1,256,256,3])
 
     
   return conv18,a2,inpp,Y
