@@ -50,7 +50,7 @@ def read_dataset(data_dir, testing_percentage=0.0, validation_percentage=0.2):
     pickle_filename = "places.pickle"
     pickle_filepath = os.path.join(data_dir, pickle_filename)
     if not os.path.exists(pickle_filepath):
-        utils.maybe_download_and_extract(data_dir, DATA_URL)
+        utils.maybe_download_and_extract(data_dir, DATA_URL, is_tarfile=True)
         places_folder = (DATA_URL.split("/")[-1]).split(os.path.extsep)[0]
         result = create_image_lists(os.path.join(data_dir, places_folder), testing_percentage, validation_percentage)
         print ("Pickling ...")

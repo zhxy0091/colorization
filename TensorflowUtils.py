@@ -9,7 +9,7 @@ from skimage import io, color
 import scipy.io
 
 
-def maybe_download_and_extract(dir_path, url_name, is_tarfile=False, is_zipfile=False):
+def maybe_download_and_extract(dir_path, url_name, is_tarzipfile=False, is_zipfile=False, is_tarfile=False):
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
     filename = url_name.split('/')[-1]
@@ -24,13 +24,13 @@ def maybe_download_and_extract(dir_path, url_name, is_tarfile=False, is_zipfile=
         print()
         statinfo = os.stat(filepath)
         print('Succesfully downloaded', filename, statinfo.st_size, 'bytes.')
-        if is_tarfile:
+        if is_tarzipfile:
             tarfile.open(filepath, 'r:gz').extractall(dir_path)
         elif is_zipfile:
             with zipfile.ZipFile(filepath) as zf:
                 zip_dir = zf.namelist()[0]
                 zf.extractall(dir_path)
-        else:
+        elif is_tarfile:
             tarfile.open(filepath, 'r:').extractall(dir_path)
 
 
