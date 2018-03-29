@@ -6,7 +6,6 @@
 
 from __future__ import print_function
 
-__author__ = "shekkizh"
 '''
 Tensorflow implemenation of Image colorization using Adversarial loss
 '''
