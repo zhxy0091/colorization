@@ -88,8 +88,8 @@ def create_image_lists(image_dir, testing_percentage=0.0, validation_percentage=
             print("file_name", filename, "is invalid") 
         if(i%10000 == 0):
             print("loading", i)
-        if(i >1000):
-            break
+        # if(i >1000):
+        #     break
         i += 1
 
     if not file_list:

@@ -12,16 +12,18 @@ Tensorflow implemenation of Image colorization using Adversarial loss
 import tensorflow as tf
 import numpy as np
 import TensorflowUtils as utils
+import read_LaMemDataset as lamem
 import read_FlowersDataset as flowers
+import read_Places as places
 import datetime
 import BatchDatsetReader as dataset
 from six.moves import xrange
 import os
 
 FLAGS = tf.flags.FLAGS
-tf.flags.DEFINE_integer("batch_size", "1", "batch size for training")
-tf.flags.DEFINE_string("logs_dir", "logs/", "path to logs directory")
-tf.flags.DEFINE_string("data_dir", "Data_zoo/flower/", "path to dataset")
+tf.flags.DEFINE_integer("batch_size", "16", "batch size for training")
+tf.flags.DEFINE_string("logs_dir", "logs/places", "path to logs directory")
+tf.flags.DEFINE_string("data_dir", "Data_zoo/places/", "path to dataset")
 tf.flags.DEFINE_float("learning_rate", "1e-4", "Learning rate for Adam Optimizer")
 tf.flags.DEFINE_float("beta1", "0.9", "Beta 1 value to use in Adam Optimizer")
 tf.flags.DEFINE_string("model_dir", "Model_zoo/", "Path to vgg model mat")
@@ -31,7 +33,7 @@ tf.flags.DEFINE_bool('restore_model', "False", "Restore Model: True/ False")
 
 MODEL_URL = 'http://www.vlfeat.org/matconvnet/models/beta16/imagenet-vgg-verydeep-19.mat'
 
-MAX_ITERATION = int(1e5 + 1)
+MAX_ITERATION = int(5e5 + 1)
 IMAGE_SIZE = 256
 ADVERSARIAL_LOSS_WEIGHT = 1e-3
 
@@ -140,7 +142,7 @@ def main(argv=None):
     train_op = train(gen_loss_mse, train_variables)
 
     print("Reading image dataset...")
-    train_images, testing_images, validation_images = flowers.read_dataset(FLAGS.data_dir)
+    train_images, testing_images, validation_images = places.read_dataset(FLAGS.data_dir, 0.0, 0.2)
     #train_images = lamem.read_dataset(FLAGS.data_dir)
     image_options = {"resize": True, "resize_size": IMAGE_SIZE, "color": "LAB"}
     batch_reader = dataset.BatchDatset(train_images, image_options)
