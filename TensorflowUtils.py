@@ -30,6 +30,8 @@ def maybe_download_and_extract(dir_path, url_name, is_tarfile=False, is_zipfile=
             with zipfile.ZipFile(filepath) as zf:
                 zip_dir = zf.namelist()[0]
                 zf.extractall(dir_path)
+        else:
+            tarfile.open(filepath, 'r:').extractall(dir_path)
 
 
 def get_model_data(dir_path, model_url):

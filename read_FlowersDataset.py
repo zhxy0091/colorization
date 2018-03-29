@@ -14,13 +14,13 @@ import TensorflowUtils as utils
 DATA_URL = 'http://download.tensorflow.org/example_images/flower_photos.tgz'
 
 
-def read_dataset(data_dir):
+def read_dataset(data_dir, testing_percentage=0.0, validation_percentage=0.2):
     pickle_filename = "flowers_data.pickle"
     pickle_filepath = os.path.join(data_dir, pickle_filename)
     if not os.path.exists(pickle_filepath):
         utils.maybe_download_and_extract(data_dir, DATA_URL, is_tarfile=True)
         flower_folder = os.path.splitext(DATA_URL.split("/")[-1])[0]
-        result = create_image_lists(os.path.join(data_dir, flower_folder), 0.0, 0.2)
+        result = create_image_lists(os.path.join(data_dir, flower_folder), testing_percentage, validation_percentage)
         print("Training set: %d" % len(result['train']))
         print("Test set: %d" % len(result['test']))
         print("Validation set: %d" % len(result['validation']))
