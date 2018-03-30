@@ -47,11 +47,14 @@ class BatchDatset:
                 resize_image = image
 
             if self.image_options.get("color", False):
+
                 option = self.image_options['color']
                 if option == "LAB":
                     resize_image = color.rgb2lab(resize_image)
                 elif option == "HSV":
                     resize_image = color.rgb2hsv(resize_image)
+                elif option == "RGB":
+                    pass
         except:
             print ("Error reading file: %s of shape %s" % (filename, str(image.shape)))
             raise
