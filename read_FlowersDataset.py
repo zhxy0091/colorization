@@ -14,7 +14,7 @@ import TensorflowUtils as utils
 DATA_URL = 'http://download.tensorflow.org/example_images/flower_photos.tgz'
 
 
-def read_dataset(data_dir, testing_percentage=0.0, validation_percentage=0.2):
+def read_dataset(data_dir, testing_percentage=0.1, validation_percentage=0.2):
     pickle_filename = "flowers_data.pickle"
     pickle_filepath = os.path.join(data_dir, pickle_filename)
     if not os.path.exists(pickle_filepath):
@@ -43,7 +43,7 @@ def read_dataset(data_dir, testing_percentage=0.0, validation_percentage=0.2):
     return training_images, testing_images, validation_images
 
 
-def create_image_lists(image_dir, testing_percentage=0.0, validation_percentage=0.0):
+def create_image_lists(image_dir, testing_percentage=0.1, validation_percentage=0.0):
     """
     Code modified from tensorflow/tensorflow/examples/image_retraining
     """
