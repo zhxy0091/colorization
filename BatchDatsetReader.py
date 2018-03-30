@@ -59,7 +59,10 @@ class BatchDatset:
         return np.array(resize_image)
 
     def get_records(self):
-        return self.images
+        return np.expand_dims(self.images[:, :, :, 0], axis=3), self.images
+
+    def get_batch_offset(self):
+        return self.batch_offset
 
     def reset_batch_offset(self, offset=0):
         self.batch_offset = offset
@@ -86,3 +89,4 @@ class BatchDatset:
         indexes = np.random.randint(0, self.images.shape[0], size=[batch_size]).tolist()
         images = self.images[indexes]
         return np.expand_dims(images[:, :, :, 0], axis=3), images
+
