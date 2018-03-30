@@ -190,9 +190,11 @@ def main(argv=None):
         pred, mse = sess.run([pred_image,gen_loss_mse], feed_dict=feed_dict)
         print("Current batch loss = ", mse)
         loss += mse*1.0 / (len(validation_images)/FLAGS.batch_size)
+        idx = 0
         for itr in range(startIdx, startIdx+FLAGS.batch_size):
-            utils.save_image(color_images[itr], save_dir, "gt" + str(itr))
-            utils.save_image(pred[itr].astype(np.float64), save_dir, "pred" + str(itr))
+            utils.save_image(color_images[idx], save_dir, "gt" + str(itr))
+            utils.save_image(pred[idx].astype(np.float64), save_dir, "pred" + str(itr))
+            idx += 1
         print("--- Images saved on validation run ---")
     print("Validation loss = ", loss)
  
