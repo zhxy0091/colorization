@@ -18,7 +18,7 @@ def read_dataset(data_dir, testing_percentage=0.1, validation_percentage=0.2):
     pickle_filename = "flowers_data.pickle"
     pickle_filepath = os.path.join(data_dir, pickle_filename)
     if not os.path.exists(pickle_filepath):
-        utils.maybe_download_and_extract(data_dir, DATA_URL, is_tarfile=True)
+        utils.maybe_download_and_extract(data_dir, DATA_URL, is_tarzipfile=True)
         flower_folder = os.path.splitext(DATA_URL.split("/")[-1])[0]
         result = create_image_lists(os.path.join(data_dir, flower_folder), testing_percentage, validation_percentage)
         print("Training set: %d" % len(result['train']))
