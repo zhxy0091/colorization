@@ -24,5 +24,4 @@ main.py: build network and train the model
 
 evaluation.py: restore the trained model, predict validation and test data, and calculate the loss.
 
-
-
+compare_image.ipynb: compare result of prediction with grayscale image and ground truth image
