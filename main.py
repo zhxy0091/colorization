@@ -34,7 +34,7 @@ tf.flags.DEFINE_bool('restore_model', "False", "Restore Model: True/ False")
 MODEL_URL = 'http://www.vlfeat.org/matconvnet/models/beta16/imagenet-vgg-verydeep-19.mat'
 
 MAX_ITERATION = int(1e5 + 1)
-IMAGE_SIZE = 256
+IMAGE_SIZE = 224
 ADVERSARIAL_LOSS_WEIGHT = 1e-3
 
 
@@ -152,7 +152,7 @@ def main(argv=None):
     summary_op = tf.summary.merge_all()
     saver = tf.train.Saver()
     summary_writer = tf.summary.FileWriter(FLAGS.logs_dir, sess.graph)
-    sess.run(tf.global_variables_initializer())
+    sess.run(tf.global_variables_initializer()) 
 
     if FLAGS.restore_model:
         ckpt = tf.train.get_checkpoint_state(FLAGS.logs_dir)
@@ -167,7 +167,7 @@ def main(argv=None):
 
             if itr % 10 == 0:
                 mse, summary_str = sess.run([gen_loss_mse, summary_op], feed_dict=feed_dict)
-#                summary_writer.add_summary(summary_str, itr)
+                summary_writer.add_summary(summary_str, itr)
                 print("Step: %d, MSE: %g" % (itr, mse))
 
             if itr % 100 == 0:
