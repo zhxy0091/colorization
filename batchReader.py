@@ -41,6 +41,7 @@ class BatchDatset:
             image_path = record["image_path"].values[0].replace("/content/","Data_zoo/flowers/")
             raw = record["heatmap"].values[0]
             heatmap = cPickle.loads(bytes(raw, "utf-8"), encoding="bytes")
+            heatmap = np.log(heatmap+1)
             heatmap = np.reshape(heatmap, (224,224,1))
             heatmap = np.repeat(heatmap,3, axis=2)
             self.images.append(self._transform(image_path))
