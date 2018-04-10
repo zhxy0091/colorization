@@ -125,7 +125,7 @@ def main(argv=None):
     lab_images = tf.placeholder(tf.float32, shape=[None, None, None, 3], name="LAB_image")
     heat_maps = tf.placeholder(tf.float32, shape=[None, None, None, 3], name="heat_map")
     pred_image = generator(images, train_phase)
-    gen_loss_mse = tf.reduce_mean(2 * heat_maps * tf.nn.l2_loss(pred_image - lab_images) / (IMAGE_SIZE * IMAGE_SIZE * 100 * 100)
+    gen_loss_mse = tf.reduce_mean(2 * heat_maps * tf.nn.l2_loss(pred_image - lab_images) / (IMAGE_SIZE * IMAGE_SIZE * 100 * 100))
     tf.summary.scalar("Generator_loss_MSE", gen_loss_mse)
 
     train_variables = tf.trainable_variables()
