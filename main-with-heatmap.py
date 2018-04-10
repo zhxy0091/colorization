@@ -135,7 +135,7 @@ def main(argv=None):
     train_op = train(gen_loss_mse, train_variables)
 
     print("Reading image dataset...")
-    train_data, test_data = flowers.read_dataset("/Users/cyrus/desktop")
+    train_data, test_data = flowers.read_dataset(FLAGS.data_dir)
     image_options = {"resize": True, "resize_size": IMAGE_SIZE, "color": "LAB"}
     batch_reader = dataset.BatchDatset(train_data, image_options)
 
@@ -147,7 +147,7 @@ def main(argv=None):
     sess.run(tf.global_variables_initializer())
 
     if FLAGS.restore_model:
-        ckpt = tf.train.get_checkpoint_state(FLAGS.logs_dir)
+        ckpt = tf.train.get_checkpoint_state(FLAGS.logs_dir+"model_no_heatmap/")
         if ckpt and ckpt.model_checkpoint_path:
             saver.restore(sess, ckpt.model_checkpoint_path)
             print("Model restored...")
